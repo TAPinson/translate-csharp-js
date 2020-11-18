@@ -9,13 +9,11 @@ namespace dinner_party
         {
             List<Guest> guestList = new List<Guest>();
 
-
             Guest marilynMonroe = new Guest();
             marilynMonroe.AddName("Marilyn Monroe");
             marilynMonroe.AddOccupation("entertainer");
-            marilynMonroe.AddOccupation("(1926 - 1962) American actress, singer, model");
+            marilynMonroe.AddBio("(1926 - 1962) American actress, singer, model");
             guestList.Add(marilynMonroe);
-
 
             Guest abrahamLincoln = new Guest();
             abrahamLincoln.AddName("Abraham Lincoln");
@@ -61,10 +59,13 @@ namespace dinner_party
 
             Table allTables = new Table();
 
+            List<string> allOccupations = new List<string>();
+
             foreach (Guest guest in guestList)
             {
-                if (!allTables.Table1.Contains(guest))
+                if (!allOccupations.Contains(guest.Occupation))
                 {
+                    allOccupations.Add(guest.Occupation);
                     allTables.Table1.Add(guest);
                 }
                 else
@@ -72,8 +73,19 @@ namespace dinner_party
                     allTables.Table2.Add(guest);
                 }
             }
+            Console.WriteLine("Table 1");
+            foreach (Guest guest in allTables.Table1)
+            {
+                Console.WriteLine($"{guest.Name} ({guest.Occupation}) {guest.Bio}");
+            }
 
+            Console.WriteLine(" ");
 
+            Console.WriteLine("Table 2");
+            foreach (Guest guest in allTables.Table2)
+            {
+                Console.WriteLine($"{guest.Name} ({guest.Occupation}) {guest.Bio}");
+            }
 
         }
     }
